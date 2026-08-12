@@ -1,0 +1,121 @@
+<!doctype html>
+<html lang="en-AU">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="A simple map of Medicare-eligible MRI locations across Australia, with published billing signals where available." />
+  <meta name="theme-color" content="#071a20" />
+  <title>MRI Finder AU — Alpha</title>
+  <link rel="stylesheet" href="vendor/leaflet/leaflet.css" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <a class="skip-link" href="#results">Skip to MRI locations</a>
+
+  <header class="site-header">
+    <a class="brand" href="#top" aria-label="MRI Finder AU home">
+      <span class="brand-mark" aria-hidden="true">M</span>
+      <span>MRI Finder AU</span>
+      <span class="alpha-chip">ALPHA</span>
+    </a>
+    <a class="source-link" href="https://www.health.gov.au/topics/diagnostic-imaging/MRI-and-PET-locations" target="_blank" rel="noreferrer">Government source ↗</a>
+  </header>
+
+  <main id="top">
+    <section class="hero" aria-labelledby="page-title">
+      <div>
+        <p class="eyebrow">A small, independent hobby project</p>
+        <h1 id="page-title">Find an MRI location in Australia.</h1>
+        <p class="hero-copy">Explore the Australian Government’s published Medicare-eligible MRI locations on a real map. Billing notes are added only where we have a usable published signal.</p>
+      </div>
+      <div class="hero-stat" aria-label="Official MRI location count">
+        <strong id="officialCount">421</strong>
+        <span>official MRI locations</span>
+      </div>
+    </section>
+
+    <section class="plain-warning" aria-label="Important billing note">
+      <strong>Medicare-eligible does not mean automatically bulk billed.</strong>
+      <span>The exact MRI, referral rules and fee still need to be confirmed with the clinic.</span>
+    </section>
+
+    <section class="controls" aria-label="Search and filter MRI locations">
+      <label>
+        <span>Clinic, suburb or postcode</span>
+        <input id="searchInput" type="search" placeholder="Try Fitzroy or 3065" autocomplete="off" />
+      </label>
+      <label>
+        <span>State or territory</span>
+        <select id="stateSelect">
+          <option value="ALL">All Australia</option>
+          <option value="ACT">ACT</option>
+          <option value="NSW">New South Wales</option>
+          <option value="NT">Northern Territory</option>
+          <option value="QLD">Queensland</option>
+          <option value="SA">South Australia</option>
+          <option value="TAS">Tasmania</option>
+          <option value="VIC" selected>Victoria</option>
+          <option value="WA">Western Australia</option>
+        </select>
+      </label>
+      <label>
+        <span>Billing information</span>
+        <select id="billingSelect">
+          <option value="all">All billing statuses</option>
+          <option value="bulk">Bulk option published</option>
+          <option value="mixed">Mixed / conditional</option>
+          <option value="private">Private indicated</option>
+          <option value="unsure">Not published</option>
+        </select>
+      </label>
+      <button class="location-button" id="useLocationButton" type="button">Use my location</button>
+    </section>
+    <p class="location-status" id="locationStatus" role="status" aria-live="polite"></p>
+
+    <section class="legend" aria-label="Map colour legend">
+      <span><i class="dot dot-bulk"></i> Bulk option published</span>
+      <span><i class="dot dot-mixed"></i> Mixed / conditional</span>
+      <span><i class="dot dot-private"></i> Private indicated</span>
+      <span><i class="dot dot-unsure"></i> Not published</span>
+    </section>
+
+    <section class="finder-layout">
+      <div class="map-panel">
+        <div id="map" role="application" aria-label="Map of exact published MRI practice coordinates"></div>
+        <p class="map-note">Pins use coordinates from the Australian Government MRI map. Map tiles are supplied by OpenStreetMap and may receive ordinary web request information.</p>
+      </div>
+
+      <div class="results-panel" id="results">
+        <div class="results-heading">
+          <div>
+            <p class="eyebrow">Matching locations</p>
+            <h2 id="resultsTitle">Victoria MRI locations</h2>
+          </div>
+          <strong id="resultCount" class="result-count">0</strong>
+        </div>
+        <div class="results-list" id="resultsList"></div>
+      </div>
+    </section>
+
+    <section class="about-alpha">
+      <h2>What this Alpha is — and isn’t</h2>
+      <div class="about-grid">
+        <p><strong>Location source</strong><br />LSPN, practice name, address and coordinates come from the Australian Government’s public MRI Unit Locations layer.</p>
+        <p><strong>Billing colours</strong><br />These are limited published signals, not a price quote or personal Medicare eligibility decision. Purple simply means we have not added reliable billing information yet.</p>
+        <p><strong>Before travelling</strong><br />Call to confirm the exact scan, referral requirements, preparation, fee, appointment availability and latest arrival time.</p>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p>Data: Australian Government Department of Health, Disability and Ageing / Services Australia, licensed under <a href="https://creativecommons.org/licenses/by/4.0/" target="_blank" rel="noreferrer">CC BY 4.0</a>.</p>
+    <p id="dataFreshness"></p>
+    <p>MRI Finder AU is independent and is not affiliated with Medicare or any clinic.</p>
+  </footer>
+
+  <script src="vendor/leaflet/leaflet.js"></script>
+  <script src="map-config.js"></script>
+  <script src="mri-locations.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
