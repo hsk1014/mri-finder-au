@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="description" content="A simple map of Medicare-eligible MRI locations across Australia, with published billing signals where available." />
+  <meta name="description" content="A simple map of Medicare-eligible and provider-published no-Medicare-licence MRI locations across Australia." />
   <meta name="theme-color" content="#071a20" />
   <title>MRI Finder AU — Alpha</title>
   <link rel="stylesheet" href="vendor/leaflet/leaflet.css" />
@@ -26,17 +26,17 @@
       <div>
         <p class="eyebrow">A small, independent hobby project</p>
         <h1 id="page-title">Find an MRI location in Australia.</h1>
-        <p class="hero-copy">Explore the Australian Government’s published Medicare-eligible MRI locations on a real map. Billing notes are added only where we have a usable published signal.</p>
+        <p class="hero-copy">Explore government-published Medicare-eligible MRI locations plus provider-published no-Medicare-licence MRI locations on one real map.</p>
       </div>
-      <div class="hero-stat" aria-label="Official MRI location count">
-        <strong id="officialCount">421</strong>
-        <span>official MRI locations</span>
+      <div class="hero-stat" aria-label="Published MRI location count">
+        <strong id="officialCount">443</strong>
+        <span>published MRI locations</span>
       </div>
     </section>
 
     <section class="plain-warning" aria-label="Important billing note">
       <strong>Medicare-eligible does not mean automatically bulk billed.</strong>
-      <span>The exact MRI, referral rules and fee still need to be confirmed with the clinic.</span>
+      <span>No-Medicare-licence locations may require the full private fee. Confirm the exact MRI, referral and quote with the clinic.</span>
     </section>
 
     <section class="controls" aria-label="Search and filter MRI locations">
@@ -59,12 +59,20 @@
         </select>
       </label>
       <label>
+        <span>Medicare equipment status</span>
+        <select id="eligibilitySelect">
+          <option value="all">All MRI locations</option>
+          <option value="eligible">Medicare-eligible</option>
+          <option value="ineligible">Not Medicare-eligible</option>
+        </select>
+      </label>
+      <label>
         <span>Billing information</span>
         <select id="billingSelect">
           <option value="all">All billing statuses</option>
           <option value="bulk">Bulk option published</option>
           <option value="mixed">Mixed / conditional</option>
-          <option value="private">Private indicated</option>
+          <option value="private">Private / self-funded</option>
           <option value="unsure">Not published</option>
         </select>
       </label>
@@ -75,14 +83,14 @@
     <section class="legend" aria-label="Map colour legend">
       <span><i class="dot dot-bulk"></i> Bulk option published</span>
       <span><i class="dot dot-mixed"></i> Mixed / conditional</span>
-      <span><i class="dot dot-private"></i> Private indicated</span>
+      <span><i class="dot dot-private"></i> Private / self-funded</span>
       <span><i class="dot dot-unsure"></i> Not published</span>
     </section>
 
     <section class="finder-layout">
       <div class="map-panel">
         <div id="map" role="application" aria-label="Map of exact published MRI practice coordinates"></div>
-        <p class="map-note">Pins use coordinates from the Australian Government MRI map. Map tiles are supplied by OpenStreetMap and may receive ordinary web request information.</p>
+        <p class="map-note">Eligible pins use government coordinates; no-licence pins use coordinates embedded in the provider’s official clinic page. Map tiles are supplied by OpenStreetMap.</p>
       </div>
 
       <div class="results-panel" id="results">
@@ -100,15 +108,16 @@
     <section class="about-alpha">
       <h2>What this Alpha is — and isn’t</h2>
       <div class="about-grid">
-        <p><strong>Location source</strong><br />LSPN, practice name, address and coordinates come from the Australian Government’s public MRI Unit Locations layer.</p>
-        <p><strong>Billing colours</strong><br />These are limited published signals, not a price quote or personal Medicare eligibility decision. Purple simply means we have not added reliable billing information yet.</p>
+        <p><strong>Location sources</strong><br />421 eligible locations come from the Australian Government layer. 22 no-licence locations come from I-MED’s current public MRI licence list and official clinic pages.</p>
+        <p><strong>Coverage limit</strong><br />There is no complete public national register of Medicare-ineligible MRI equipment. Other providers’ unlicensed locations may still be missing.</p>
+        <p><strong>Billing colours</strong><br />These are published signals, not a price quote. A no-licence MRI generally cannot attract a Medicare rebate, but the clinic must confirm the exact fee and funding pathway.</p>
         <p><strong>Before travelling</strong><br />Call to confirm the exact scan, referral requirements, preparation, fee, appointment availability and latest arrival time.</p>
       </div>
     </section>
   </main>
 
   <footer>
-    <p>Data: Australian Government Department of Health, Disability and Ageing / Services Australia, licensed under <a href="https://creativecommons.org/licenses/by/4.0/" target="_blank" rel="noreferrer">CC BY 4.0</a>.</p>
+    <p>Data: Australian Government Department of Health, Disability and Ageing / Services Australia under <a href="https://creativecommons.org/licenses/by/4.0/" target="_blank" rel="noreferrer">CC BY 4.0</a>, plus <a href="https://i-med.com.au/procedures/mri-locations" target="_blank" rel="noreferrer">I-MED’s published MRI licence list</a>.</p>
     <p id="dataFreshness"></p>
     <p>MRI Finder AU is independent and is not affiliated with Medicare or any clinic.</p>
   </footer>

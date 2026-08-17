@@ -23,6 +23,7 @@
   const elements = {
     search: document.querySelector("#searchInput"),
     state: document.querySelector("#stateSelect"),
+    eligibility: document.querySelector("#eligibilitySelect"),
     billing: document.querySelector("#billingSelect"),
     useLocation: document.querySelector("#useLocationButton"),
     locationStatus: document.querySelector("#locationStatus"),
@@ -89,11 +90,15 @@
   function getFilteredLocations() {
     const query = normalise(elements.search.value);
     const selectedState = elements.state.value;
+    const selectedEligibility = elements.eligibility.value;
     const selectedBilling = elements.billing.value;
     const matches = data.locations.filter((location) => {
       const haystack = normalise(`${location.name} ${location.address} ${location.postcode} ${location.lspn}`);
       return (!query || haystack.includes(query))
         && (selectedState === "ALL" || location.state === selectedState)
+        && (selectedEligibility === "all"
+          || (selectedEligibility === "eligible" && location.medicareEligible)
+          || (selectedEligibility === "ineligible" && !location.medicareEligible))
         && (selectedBilling === "all" || location.billingStatus === selectedBilling);
     }).map((location) => ({
       ...location,
@@ -143,7 +148,7 @@
         <p class="clinic-address">${escapeHtml(location.address)}</p>
         ${location.distance !== null ? `<p class="distance">Approximately ${location.distance < 10 ? location.distance.toFixed(1) : Math.round(location.distance)} km away</p>` : ""}
         <div class="card-meta">
-          <span class="badge badge-eligible">Medicare-eligible MRI</span>
+          <span class="badge badge-${location.medicareEligible ? "eligible" : "ineligible"}">${escapeHtml(location.eligibilityLabel || (location.medicareEligible ? "Medicare-eligible" : "Not Medicare-eligible"))} MRI</span>
           <span class="badge badge-${escapeHtml(location.billingStatus)}">${escapeHtml(location.billingLabel)}</span>
         </div>
         <p class="billing-condition">${escapeHtml(location.billingCondition)}</p>
@@ -175,6 +180,7 @@
   }
 
   elements.search.addEventListener("input", render);
+  elements.eligibility.addEventListener("change", render);
   elements.state.addEventListener("change", () => {
     userLocation = null;
     userLayer.clearLayers();
@@ -213,8 +219,8 @@
     }, { enableHighAccuracy: false, timeout: 10000, maximumAge: 300000 });
   });
 
-  elements.officialCount.textContent = data.metadata.officialLocationCount;
+  elements.officialCount.textContent = data.metadata.totalLocationCount || data.locations.length;
   const sourceDate = new Intl.DateTimeFormat("en-AU", { day: "numeric", month: "long", year: "numeric" }).format(new Date(data.metadata.sourceModified));
-  elements.dataFreshness.textContent = `Official source layer last modified ${sourceDate}. Alpha snapshot generated ${new Date(data.metadata.generatedAt).toLocaleDateString("en-AU")}.`;
+  elements.dataFreshness.textContent = `Government layer: ${data.metadata.officialLocationCount} eligible locations, last modified ${sourceDate}. Provider list: ${data.metadata.ineligibleLocationCount || 0} no-licence locations. Snapshot generated ${new Date(data.metadata.generatedAt).toLocaleDateString("en-AU")}.`;
   render();
 })();
