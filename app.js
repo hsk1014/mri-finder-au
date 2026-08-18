@@ -77,10 +77,7 @@
   }
 
   function directionsUrl(location) {
-    if (location.coordinateAccuracy === "postcode") {
-      return `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(`${location.name} ${location.address.replace(/—.*$/, "")}`)}`;
-    }
-    return `https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(`${location.latitude},${location.longitude}`)}`;
+   return `https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(`${location.latitude},${location.longitude}`)}`;
   }
 
   function clinicSearchUrl(location) {

@@ -7,7 +7,7 @@
   <meta name="theme-color" content="#071a20" />
   <title>MRI Finder AU — Alpha</title>
   <link rel="stylesheet" href="vendor/leaflet/leaflet.css" />
-  <link rel="stylesheet" href="styles.css?v=20260819-639" />
+  <link rel="stylesheet" href="styles.css?v=20260819-exact639" />
 </head>
 <body>
   <a class="skip-link" href="#results">Skip to MRI locations</a>
@@ -78,7 +78,7 @@
     <section class="finder-layout">
       <div class="map-panel">
         <div id="map" role="application" aria-label="Map of exact published MRI practice coordinates"></div>
-        <p class="map-note">Government-listed units use exact published coordinates. Other provider-listed MRI units use an exact provider coordinate where available or an approximate postcode point. Map tiles are supplied by OpenStreetMap.</p>
+        <p class="map-note">All pins use published or street-address-verified coordinates. Map tiles are supplied by OpenStreetMap. Confirm the clinic address before travelling.</p>
       </div>
 
       <div class="results-panel" id="results">
@@ -98,21 +98,21 @@
       <div class="about-grid">
         <p><strong>Bulk bill MRI units</strong><br />Government-listed MRI locations are shown as Bulk bill units. This is conditional and does not promise that every patient or MRI will be bulk billed.</p>
         <p><strong>Private billing MRI units</strong><br />Provider-listed MRI locations not matched to the government list are shown as Private billing for this Alpha.</p>
-        <p><strong>Location accuracy</strong><br />Some Private billing pins are approximate postcode locations. Use the clinic name and directions search, then confirm the address before travelling.</p>
+        <p><strong>Location accuracy</strong><br />Private billing addresses and pins were checked against provider pages and/or Australian Government national address data. Confirm the address before travelling.</p>
         <p><strong>Before travelling</strong><br />Call to confirm the exact scan, referral requirements, preparation, fee, appointment availability and latest arrival time.</p>
       </div>
     </section>
   </main>
 
   <footer>
-    <p>Data: Australian Government Department of Health, Disability and Ageing / Services Australia under <a href="https://creativecommons.org/licenses/by/4.0/" target="_blank" rel="noreferrer">CC BY 4.0</a>, provider-published MRI directories, and the public-domain <a href="https://github.com/matthewproctor/australianpostcodes" target="_blank" rel="noreferrer">Australian Postcodes</a> dataset for approximate pins.</p>
+    <p>Data: Australian Government Department of Health, Disability and Ageing / Services Australia under <a href="https://creativecommons.org/licenses/by/4.0/" target="_blank" rel="noreferrer">CC BY 4.0</a>, provider-published MRI directories, and <a href="https://www.arcgis.com/home/item.html?id=41473f0c760842a38cb3bcf6a3f91935" target="_blank" rel="noreferrer">Geoscience Australia National Address Points (G-NAF)</a> for address verification.</p>
     <p id="dataFreshness"></p>
     <p>MRI Finder AU is independent and is not affiliated with Medicare or any clinic.</p>
   </footer>
 
   <script src="vendor/leaflet/leaflet.js"></script>
-  <script src="map-config.js?v=20260819-639"></script>
-  <script src="mri-locations.js?v=20260819-639"></script>
-  <script src="app.js?v=20260819-639"></script>
+  <script src="map-config.js?v=20260819-exact639"></script>
+  <script src="mri-locations.js?v=20260819-exact639"></script>
+  <script src="app.js?v=20260819-exact639"></script>
 </body>
 </html>

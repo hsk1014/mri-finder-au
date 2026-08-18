@@ -1,19 +1,39 @@
 # MRI Finder AU — Alpha
 
-A lightweight public map of MRI units in Australia.
+Lightweight hobby Alpha for finding Bulk bill and Private billing MRI units on a real map and in a matching list. Government-listed locations are grouped as `Bulk bill MRI unit` with an always-conditional notice; other reviewed provider-listed MRI locations are grouped as `Private billing MRI unit`.
 
-- 639 compiled MRI locations
-- 421 Australian Government-listed locations shown as `Bulk bill MRI unit`
-- 218 other reviewed provider-listed locations shown as `Private billing MRI unit`
-- state, place and billing-type filters
-- no accounts, submissions, analytics or booking
+Live Alpha: https://hsk1014.github.io/mri-finder-au/
 
-Bulk billing is always conditional. A clinic can choose not to bulk bill a particular patient or MRI. Users should confirm the requested scan, referral, clinic address, fee and availability when booking.
+Open `index.html` directly in a browser. No build step or package install is required. The basemap needs network access to the configured third-party tile endpoint; search and clinic results remain available if tiles fail. `mri-locations.js` is the generated public Alpha snapshot and `tools/fetch-mri-alpha.js` refreshes it from the official ArcGIS Feature Layer. The earlier broad-directory files remain in the repository as inactive project history.
 
-Government-listed units use exact government coordinates. The Private group contains 22 exact provider coordinates and 196 approximate locality/postcode points; approximate locations are labelled and their Directions action searches by clinic name.
+## Included
 
-Location data attribution:
+- 421 government-listed MRI locations shown as conditional Bulk bill MRI units
+- 218 provider-listed MRI locations not matched to the government list, shown as Private billing MRI units
+- Street-address coordinates for all 218 Private billing locations, checked against provider pages and/or Geoscience Australia National Address Points (G-NAF)
+- Leaflet pins plus matching clinic list
+- Clinic/suburb/postcode, state and two-option billing filters
+- Victoria default and nationwide view
+- Directions and clinic-phone web search links
+- Explicit opt-in, in-memory approximate distance sorting
+- Short visible reminder to confirm the exact MRI, referral rules, fee and availability with the clinic
 
-- Australian Government Department of Health, Disability and Ageing / Services Australia, [MRI Unit Locations](https://www.health.gov.au/topics/diagnostic-imaging/MRI-and-PET-locations), licensed under [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/)
-- reviewed provider-published MRI directories, including the [I-MED MRI licence list](https://i-med.com.au/procedures/mri-locations)
-- Matthew Proctor's public-domain [Australian Postcodes](https://github.com/matthewproctor/australianpostcodes) dataset for approximate pins
+## Map boundary
+
+Leaflet 1.9.4 is vendored locally under `vendor/leaflet/`. Tile-provider settings are separate in `map-config.js`; the checked-in OpenStreetMap endpoint is marked as a replaceable development/public-beta default, not a production-ready unlimited backend. See `docs/MAP_PROVIDER_BOUNDARY.md` for attribution, privacy, availability, geocoding, production-provider, and verified-coordinate requirements.
+
+Government-listed locations use published points from the Australian Government MRI Unit Locations layer. Every other reviewed MRI location uses a street address and coordinate checked against the provider's published location information and/or Geoscience Australia National Address Points (G-NAF). Directions open the mapped coordinate; users should still confirm the clinic address before travelling.
+
+## Data note
+
+The Alpha snapshot contains 639 mapped locations: 421 government-listed conditional Bulk bill units and 218 Private billing units compiled from the reviewed provider directory. All 375 reviewed provider-published MRI locations are represented in the union; government-only locations account for the remaining coverage. The government source item is licensed under Creative Commons Attribution 4.0 International. Private-location address points were checked against current provider pages and/or the Australian Government's G-NAF data.
+
+This is an intentionally simple Alpha classification, not a verified price promise. Bulk billing is always conditional: a clinic may choose not to bulk bill a particular patient or examination. Users must confirm the requested scan, referral, address, fee and appointment availability with the clinic.
+
+## Continue On Another Computer
+
+The private source repository is `https://github.com/hsk1014/RADCODE`. Use GitHub as the shared source of truth and follow `docs/agents/NEW_PC_HANDOFF.md`. A fresh Codex conversation should read `AGENTS.md`, `docs/BLUEPRINT_V1.md`, and all files under `docs/agents/` before changing anything. Start each session with `git status -sb` and `git pull --ff-only`; finish material work by updating the agent files, committing, and pushing.
+
+The public hosting repository is `https://github.com/hsk1014/mri-finder-au` and contains only the static public assets. GitHub Pages serves it from `main` at the live Alpha URL above. Do not publish the private source repository merely to deploy the site.
+
+The linked Supabase project is `uqpyftifhtapgvzsxpek`. Its remote database has 45 providers, 787 locations, 38 scan types, and 4,516 service/evidence rows. Read `supabase/README.md` and the current handoff before any database operation.
