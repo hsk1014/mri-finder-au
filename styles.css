@@ -64,7 +64,7 @@ h1 { max-width: 850px; margin: 0; font-size: clamp(2.35rem, 5vw, 5.5rem); line-h
 .plain-warning { display: flex; flex-wrap: wrap; gap: .4rem 1rem; padding: .9rem 1rem; border: 1px solid #67582b; border-radius: .85rem; background: #2b2718; color: #f7e7b3; }
 .plain-warning span { color: #ddcf9f; }
 
-.controls { display: grid; grid-template-columns: 1.4fr repeat(3, minmax(150px, .75fr)) auto; gap: .8rem; margin-top: 1.2rem; padding: 1rem; border: 1px solid var(--line); border-radius: 1rem; background: var(--panel); }
+.controls { display: grid; grid-template-columns: 1.4fr repeat(2, minmax(170px, .8fr)) auto; gap: .8rem; margin-top: 1.2rem; padding: 1rem; border: 1px solid var(--line); border-radius: 1rem; background: var(--panel); }
 .controls label { display: grid; gap: .4rem; color: var(--muted); font-size: .76rem; font-weight: 750; }
 .controls input, .controls select { width: 100%; min-height: 46px; padding: 0 .8rem; border: 1px solid #31535c; border-radius: .65rem; background: #071c22; color: var(--ink); outline: none; }
 .controls input:focus, .controls select:focus, button:focus-visible, a:focus-visible { outline: 3px solid rgb(119 228 192 / 45%); outline-offset: 2px; }

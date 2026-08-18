@@ -1,18 +1,19 @@
 # MRI Finder AU — Alpha
 
-A lightweight public map of MRI locations in Australia.
+A lightweight public map of MRI units in Australia.
 
-- 421 Australian Government-published Medicare-eligible MRI practice locations
-- 22 provider-published locations explicitly listed as having no Medicare licence
-- exact Leaflet map pins and matching list
-- state, place, Medicare-equipment-status and billing-information filters
+- 639 compiled MRI locations
+- 421 Australian Government-listed locations shown as `Bulk bill MRI unit`
+- 218 other reviewed provider-listed locations shown as `Private billing MRI unit`
+- state, place and billing-type filters
 - no accounts, submissions, analytics or booking
 
-Medicare eligibility does not mean a scan will automatically be bulk billed. A no-Medicare-licence location may require the full private fee. Users should confirm the exact MRI, referral requirements, fee and availability with the clinic.
+Bulk billing is always conditional. A clinic can choose not to bulk bill a particular patient or MRI. Users should confirm the requested scan, referral, clinic address, fee and availability when booking.
 
-The 22 ineligible locations are the currently verifiable I-MED cohort, not a complete national register. Australia does not publish a complete public national list of Medicare-ineligible MRI equipment.
+Government-listed units use exact government coordinates. The Private group contains 22 exact provider coordinates and 196 approximate locality/postcode points; approximate locations are labelled and their Directions action searches by clinic name.
 
 Location data attribution:
 
 - Australian Government Department of Health, Disability and Ageing / Services Australia, [MRI Unit Locations](https://www.health.gov.au/topics/diagnostic-imaging/MRI-and-PET-locations), licensed under [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/)
-- [I-MED published MRI licence list](https://i-med.com.au/procedures/mri-locations) and official clinic pages
+- reviewed provider-published MRI directories, including the [I-MED MRI licence list](https://i-med.com.au/procedures/mri-locations)
+- Matthew Proctor's public-domain [Australian Postcodes](https://github.com/matthewproctor/australianpostcodes) dataset for approximate pins
