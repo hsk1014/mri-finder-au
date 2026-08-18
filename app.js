@@ -77,7 +77,7 @@
   }
 
   function directionsUrl(location) {
-   return `https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(`${location.latitude},${location.longitude}`)}`;
+    return `https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(`${location.latitude},${location.longitude}`)}`;
   }
 
   function clinicSearchUrl(location) {
